@@ -1,5 +1,5 @@
 /* -- Byimaan -- 
-    # BST (Binary search tree implementation...)
+    # BST (Binary search tree implementation...) -- DATE 02/09/2024
 */
 
 import { serialize } from "v8";
@@ -89,9 +89,12 @@ class BST{
         
         const _search = (node: BSTNode | null): {node: BSTNode | null, parent?: BSTNode | null, direction?: string} => {
             
+            // input validation
             if (node === null){
                 return {node: null};
             };
+            
+            // check for parent need
             if (needParent){
                 if (node?.left?.val === val){
                     // requested node found...
@@ -100,13 +103,12 @@ class BST{
                     return { node: node?.right, parent: node, direction: 'right'};
                 }
             };
+
+            // search operation
             if (node.val === val){
                 // requested node found...
                 return {node: node, parent: null};
-            };
-
-    
-            if (node?.val > val){
+            } else if (node?.val > val){
                 return _search(node.left);
             } else {
                 return _search(node.right);
